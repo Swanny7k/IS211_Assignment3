@@ -1,0 +1,68 @@
+import csv
+
+
+
+with open('weblog.csv','r') as csv_file:
+    csv_reader = csv.reader(csv_file)
+    list_of_hits = list(csv_reader)
+    #print(list_of_hits)
+
+
+
+import re
+
+#We are making counters to see how many times we get a match. When I run through the if regular expression statement
+#we should get 
+
+JPG_Count = 0
+PNG_Count = 0
+GIF_Count = 0
+Other = 0
+i = 0
+while i < len(list_of_hits):
+    if bool(re.search("JPG",list_of_hits[i][0].upper())) == True:
+        JPG_Count += 1
+    elif bool(re.search("PNG",list_of_hits[i][0].upper())) == True:
+        PNG_Count += 1
+    elif bool(re.search("GIF",list_of_hits[i][0].upper())) == True:
+        GIF_Count += 1
+    else:
+        Other += 1
+    i = i+1
+print("Amount of times JPG was used: " , JPG_Count)
+print("Amount of times PNG was used: " , PNG_Count)
+print("Amount of times JPG was used: " , GIF_Count)
+print("Amount of times anything else  was used: " , Other)
+
+total_hits = (JPG_Count + PNG_Count + GIF_Count + Other)
+JPG_Percent = (JPG_Count / total_hits * 100)
+print ("Total file count: ",  total_hits)
+print ("*****ANSWER FOR JPG HITS IS" , JPG_Percent , "% out of all files")
+#Now we will pring out how many times each . "  " was hit by running through row [0]
+
+
+
+import re
+
+#we are repeating the same steps for the browsers in the third row [2]
+Safari_Count = 0
+Chrome_Count = 0
+Firefox_Count = 0
+Other = 0
+i = 0
+while i < len(list_of_hits):
+    if bool(re.search("safari",list_of_hits[i][2].lower())) == True:
+        Safari_Count += 1
+    elif bool(re.search("chrome",list_of_hits[i][2].lower())) == True:
+        Chrome_Count += 1
+    elif bool(re.search("firefox",list_of_hits[i][2].lower())) == True:
+        Firefox_Count += 1
+    else:
+        Other += 1
+    i = i+1
+print("Total Safari hits " , Safari_Count)
+print("Totla Chrome hits" , Chrome_Count)
+print("Total Firefox hits" , Firefox_Count)
+print("Total other " , Other)
+
+print ("*****ANSWER P2***** The most used browser was Safari with ", Safari_Count, " total hits out of 1000")
